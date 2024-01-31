@@ -1,12 +1,13 @@
-import { Component, OnInit, VERSION } from "@angular/core";
+import type { OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
-  selector: "my-app",
-  templateUrl: "./components/webview.component.html",
-  styleUrls: ["./app.component.css"],
+  selector: 'my-app',
+  templateUrl: './components/webview.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  name = "Web SDK v" + VERSION.major;
+  name = 'Web SDK Angular WebView integration'
 
   ngOnInit() {}
 }

@@ -6,8 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "lint": "concurrently -r --kill-others-on-fail npm:lint:*",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint:es": "eslint --max-warnings=0 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:ts": "tsc --noEmit",
+    "format": "prettier --write . && npm run lint"
   },
   "dependencies": {
     "@angular/animations": "^12.2.3",
@@ -28,9 +32,19 @@
     "@angular-devkit/build-angular": "~12.2.3",
     "@angular/cli": "~12.2.3",
     "@angular/compiler-cli": "^12.2.3",
+    "@types/estree": "^1.0.5",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.6",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "^4.0.2"
+    "typescript": "^4.3.5"
   }
 }
