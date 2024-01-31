@@ -1,6 +1,7 @@
-import type { ElementRef, Renderer2, AfterViewInit } from '@angular/core'
-import { Component } from '@angular/core'
-import type { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
+import type { AfterViewInit } from '@angular/core'
+import { Component, Inject, ElementRef, Renderer2 } from '@angular/core'
+import type { SafeResourceUrl } from '@angular/platform-browser'
+import { DomSanitizer } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-webview',
@@ -19,9 +20,9 @@ export class WebViewComponent implements AfterViewInit {
   webviewUrl: SafeResourceUrl
 
   constructor(
-    private sanitizer: DomSanitizer,
-    private renderer: Renderer2,
-    private el: ElementRef
+    @Inject(DomSanitizer) private sanitizer: DomSanitizer,
+    @Inject(Renderer2) private renderer: Renderer2,
+    @Inject(ElementRef) private el: ElementRef
   ) {
     const url = 'https://sdk.onfido.com/blank'
     this.webviewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
