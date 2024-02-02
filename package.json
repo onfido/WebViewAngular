@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "ts-node Onfido.ts",
     "build": "ng build",
     "test": "ng test",
     "e2e": "ng e2e",
@@ -29,6 +30,8 @@
     "zone.js": "^0.14.3"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.0",
+    "@angular-builders/dev-server": "^7.3.1",
     "@angular-devkit/build-angular": "^17.1.1",
     "@angular/cli": "^17.1.1",
     "@angular/compiler-cli": "^17.1.1",
@@ -36,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "concurrently": "^7.6.0",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.3",
