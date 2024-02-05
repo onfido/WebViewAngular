@@ -6,16 +6,7 @@ import { environment } from '../environments/environment'
 
 @Component({
   selector: 'app-webview',
-  template: `
-    <div>
-      <iframe
-        [src]="webviewUrl"
-        width="100%"
-        height="10px"
-        frameborder="0"
-      ></iframe>
-    </div>
-  `,
+  template: ` <div id="onfido-container"></div> `,
 })
 export class WebViewComponent implements AfterViewInit {
   webviewUrl: SafeResourceUrl
@@ -24,10 +15,7 @@ export class WebViewComponent implements AfterViewInit {
     @Inject(DomSanitizer) private sanitizer: DomSanitizer,
     @Inject(Renderer2) private renderer: Renderer2,
     @Inject(ElementRef) private el: ElementRef
-  ) {
-    const url = 'https://sdk.onfido.com/blank'
-    this.webviewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
-  }
+  ) {}
 
   ngAfterViewInit() {
     const loadWebSDKJs = new Promise<void>((resolve, reject) => {
@@ -50,6 +38,7 @@ export class WebViewComponent implements AfterViewInit {
         Onfido.init({
             "token": "${token}",
             "workflowRunId": "${workflowRunId}",
+            "containerId": "onfido-container",
             onComplete: '_complete',
             onError: '_error'
           })
