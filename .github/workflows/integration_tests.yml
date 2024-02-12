@@ -16,6 +16,15 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+    - name: Create env file
+      env:
+        API_TOKEN: ${{secrets.API_TOKEN}}
+        WORKFLOW_ID: ${{secrets.WORKFLOW_ID}}
+        SDK_TARGET_VERSION: ${{github.event.inputs.SDK_TARGET_VERSION}}
+      run: |
+        touch .env
+        echo API_TOKEN="$API_TOKEN" >> .env
+        echo WORKFLOW_ID="$WORKFLOW_ID" >> .env
     - name: Install dependencies and build
       run: npm ci && npm run build
     - name: Install Playwright Browsers
