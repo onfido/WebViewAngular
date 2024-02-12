@@ -1,0 +1,53 @@
+{
+  "name": "onfido-web-sdk-angular",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "prebuild": "ts-node Onfido.ts",
+    "build": "ng build",
+    "test": "ng test",
+    "e2e": "ng e2e",
+    "lint": "concurrently -r --kill-others-on-fail npm:lint:*",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint:es": "eslint --max-warnings=0 'src/**/*.{js,jsx,ts,tsx}'",
+    "format": "prettier --write . && npm run lint"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.1.1",
+    "@angular/common": "^17.1.1",
+    "@angular/compiler": "^17.1.1",
+    "@angular/core": "^17.1.1",
+    "@angular/forms": "^17.1.1",
+    "@angular/platform-browser": "^17.1.1",
+    "@angular/platform-browser-dynamic": "^17.1.1",
+    "@angular/router": "^17.1.1",
+    "@babel/runtime-corejs3": "^7.15.3",
+    "@onfido/api": "^2.9.0",
+    "preact": "^10.5.14",
+    "rxjs": "^7.4.0",
+    "tslib": "^2.3.1",
+    "zone.js": "^0.14.3"
+  },
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.0",
+    "@angular-builders/dev-server": "^7.3.1",
+    "@angular-devkit/build-angular": "^17.1.1",
+    "@angular/cli": "^17.1.1",
+    "@angular/compiler-cli": "^17.1.1",
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.4.2",
+    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^5.1.6"
+  }
+}
