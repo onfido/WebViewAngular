@@ -1,16 +1,13 @@
 import type { AfterViewInit } from '@angular/core'
 import { Component, Inject, ElementRef, Renderer2 } from '@angular/core'
-import type { SafeResourceUrl } from '@angular/platform-browser'
 import { DomSanitizer } from '@angular/platform-browser'
 import { environment } from '../environments/environment'
 
 @Component({
-  selector: 'app-webview',
+  selector: 'onfido-sdk',
   template: '<div id="onfido"></div>',
 })
-export class WebViewComponent implements AfterViewInit {
-  webviewUrl: SafeResourceUrl
-
+export class OnfidoComponent implements AfterViewInit {
   constructor(
     @Inject(DomSanitizer) private sanitizer: DomSanitizer,
     @Inject(Renderer2) private renderer: Renderer2,

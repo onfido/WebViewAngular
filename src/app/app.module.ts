@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
-import { WebViewComponent } from './components/webview.component'
+import { OnfidoComponent } from './components/onfido.component'
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
-  declarations: [AppComponent, WebViewComponent],
+  declarations: [AppComponent, OnfidoComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

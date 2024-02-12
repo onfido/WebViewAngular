@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'my-app',
-  templateUrl: './components/webview.component.html',
+  templateUrl: './components/onfido.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
