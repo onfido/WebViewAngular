@@ -1,0 +1,33 @@
+name: Playwright Tests
+on:
+  workflow_dispatch:
+    inputs:
+      SDK_TARGET_VERSION:
+        description: 'Target a specific SDK version. Otherwise latest'
+        required: false
+  push:
+
+jobs:
+  test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Create env file
+      env:
+        API_TOKEN: ${{secrets.API_TOKEN}}
+        WORKFLOW_ID: ${{secrets.WORKFLOW_ID}}
+        SDK_TARGET_VERSION: ${{github.event.inputs.SDK_TARGET_VERSION}}
+      run: |
+        touch .env
+        echo API_TOKEN="$API_TOKEN" >> .env
+        echo WORKFLOW_ID="$WORKFLOW_ID" >> .env
+    - name: Install dependencies and build
+      run: npm ci && npm run build
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npm run e2e
