@@ -8,26 +8,52 @@ on:
   push:
 
 jobs:
-  test:
-    timeout-minutes: 30
+  studio-integration:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: 18
     - name: Create env file
       env:
+        IS_CLASSIC_INTEGRATION: 'false'
         API_TOKEN: ${{secrets.API_TOKEN}}
         WORKFLOW_ID: ${{secrets.WORKFLOW_ID}}
         SDK_TARGET_VERSION: ${{github.event.inputs.SDK_TARGET_VERSION}}
       run: |
         touch .env
+        echo IS_CLASSIC_INTEGRATION="$IS_CLASSIC_INTEGRATION" >> .env
         echo API_TOKEN="$API_TOKEN" >> .env
         echo WORKFLOW_ID="$WORKFLOW_ID" >> .env
     - name: Install dependencies and build
       run: npm ci && npm run build
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+    - name: Install Playwright Chromium
+      run: npx playwright install --with-deps chromium
+    - name: Run Playwright tests
+      run: npm run e2e
+
+  classic-integration:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Create env file
+      env:
+        IS_CLASSIC_INTEGRATION: 'true'
+        API_TOKEN: ${{secrets.API_TOKEN}}
+        WORKFLOW_ID: ${{secrets.WORKFLOW_ID}}
+        SDK_TARGET_VERSION: ${{github.event.inputs.SDK_TARGET_VERSION}}
+      run: |
+        touch .env
+        echo IS_CLASSIC_INTEGRATION="$IS_CLASSIC_INTEGRATION" >> .env
+        echo API_TOKEN="$API_TOKEN" >> .env
+        echo WORKFLOW_ID="$WORKFLOW_ID" >> .env
+    - name: Install dependencies and build
+      run: npm ci && npm run build
+    - name: Install Playwright Chromium
+      run: npx playwright install --with-deps chromium
     - name: Run Playwright tests
       run: npm run e2e

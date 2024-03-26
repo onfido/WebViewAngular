@@ -28,18 +28,32 @@ export class OnfidoComponent implements AfterViewInit {
 
     loadWebSDKJs
       .then(() => {
+        const isClassicIntegration = environment.IS_CLASSIC_INTEGRATION
+
         const token = environment.SDK_TOKEN
         const workflowRunId = environment.WORKFLOW_RUN_ID
 
-        const onfidoInit = `
-        Onfido.init({
-            token: "${token}",
-            workflowRunId: "${workflowRunId}",
-            containerId: "onfido",
-            onComplete: (data) => window._complete = data,
-            onError: (error) => window._error = error,
-          })
+        let onfidoInit = `
+          Onfido.init({
+              token: "${token}",
+              workflowRunId: "${workflowRunId}",
+              containerId: "onfido",
+              onComplete: (data) => window._complete = data,
+              onError: (error) => window._error = error,
+            })
         `
+
+        if (isClassicIntegration === 'true') {
+          onfidoInit = `
+            Onfido.init({
+                token: "${token}",
+                "steps": [{"type": "document", "options": { "disableCrossDevice": true } }],
+                containerId: "onfido",
+                onComplete: (data) => window._complete = data,
+                onError: (error) => window._error = error,
+              })
+            `
+        }
         const script = this.renderer.createElement('script')
         script.text = onfidoInit
         this.renderer.appendChild(
