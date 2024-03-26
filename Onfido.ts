@@ -1,6 +1,6 @@
+const fs = require('fs')
 const { Onfido, Region } = require('@onfido/api')
 const { config: configDotenv } = require('dotenv')
-const fs = require('fs')
 
 configDotenv()
 
@@ -34,8 +34,7 @@ async function createWorkflowRun(applicantId: string) {
 }
 
 async function writeEnvFile(sdkToken: string, workflowRunId: string) {
-  const envContent = `SDK_TOKEN=${sdkToken}\nWORKFLOW_RUN_ID=${workflowRunId}
-  `
+  const envContent = `SDK_TOKEN=${sdkToken}\nWORKFLOW_RUN_ID=${workflowRunId}`
 
   fs.appendFileSync('.env', envContent, 'utf-8')
 }
